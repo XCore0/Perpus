@@ -16,7 +16,7 @@ class DataBukuModels extends Model
         'Penulis',
         'Penerbit',
         'TahunTerbit',
-        'Foto',
-        'Stok'
+        'Stok',
+        'Foto'
     ];
 }

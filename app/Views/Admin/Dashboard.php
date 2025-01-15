@@ -132,7 +132,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
 
                 <li>
-                    <a href="<?= base_url('auth/logout') ?>" class="side-menu">
+                    <a href="<?= base_url('Auth/Logout') ?>" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="log-out"></i> </div>
                         <div class="side-menu__title"> Keluar </div>
                     </a>
@@ -499,275 +499,57 @@ License: You must have a valid license purchased only from themeforest(the above
                 <table class="table table-report -mt-2">
                     <thead>
                         <tr>
-                            <th class="whitespace-nowrap">IMAGES</th>
-                            <th class="whitespace-nowrap">PRODUCT NAME</th>
-                            <th class="text-center whitespace-nowrap">STOCK</th>
+                            <th class="whitespace-nowrap">FOTO</th>
+                            <th class="whitespace-nowrap">NAMA PEMINJAM</th>
+                            <th class="text-center whitespace-nowrap">BUKU DIPINJAM</th>
+                            <th class="text-center whitespace-nowrap">TANGGAL PINJAM</th>
+                            <th class="text-center whitespace-nowrap">TANGGAL KEMBALI</th>
                             <th class="text-center whitespace-nowrap">STATUS</th>
-                            <th class="text-center whitespace-nowrap">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <?php foreach ($peminjaman as $pinjam): ?>
                         <tr class="intro-x">
                             <td class="w-40">
                                 <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-4.jpg" title="Uploaded at 28 May 2020">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-12.jpg" title="Uploaded at 28 May 2020">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-8.jpg" title="Uploaded at 28 May 2020">
+                                    <div class="w-10 h-10 image-fit">
+                                        <div class="w-full h-full rounded-full bg-primary text-white flex items-center justify-center font-bold text-lg">
+                                            <?= substr($pinjam['NamaLengkap'], 0, 1) ?>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <a href="" class="font-medium whitespace-nowrap">Samsung Galaxy S20 Ultra</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Smartphone &amp; Tablet</div>
+                                <a href="javascript:;" class="font-medium whitespace-nowrap"><?= $pinjam['NamaLengkap'] ?></a>
+                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5"><?= $pinjam['Username'] ?></div>
                             </td>
-                            <td class="text-center">50</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
+                            <td class="text-center">
+                                <div class="flex flex-col items-center">
+                                    <?php foreach (array_slice($pinjam['Buku'], 0, 3) as $index => $buku): ?>
+                                        <span class="text-xs <?= $index > 0 ? 'mt-1' : '' ?>"><?= $buku ?></span>
+                                    <?php endforeach; ?>
+                                    
+                                </div>
                             </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
+                            <td class="text-center"><?= date('d M Y', strtotime($pinjam['TanggalPeminjaman'])) ?></td>
+                            <td class="text-center"><?= date('d M Y', strtotime($pinjam['TanggalPengembalian'])) ?></td>
+                            <td class="text-center">
+                                <div class="flex justify-center">
+                                    <?php 
+                                    $statusArray = explode(',', $pinjam['StatusPeminjaman']);
+                                    $displayStatus = in_array('Terlambat', $statusArray) ? 'Terlambat' : 
+                                                  (in_array('Dipinjam', $statusArray) ? 'Dipinjam' : 'Dikembalikan');
+                                    ?>
+                                    <div class="px-2 py-1 rounded-full 
+                                        <?= $displayStatus == 'Dipinjam' ? 'bg-warning/20 text-warning' : 
+                                           ($displayStatus == 'Dikembalikan' ? 'bg-success/20 text-success' : 
+                                           ($displayStatus == 'Terlambat' ? 'bg-danger/20 text-danger' : 'bg-slate-100 text-slate-500')) ?>">
+                                        <?= $displayStatus ?>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-1.jpg" title="Uploaded at 1 May 2021">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-9.jpg" title="Uploaded at 1 May 2021">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 1 May 2021">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Sony Master Series A9G</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Electronic</div>
-                            </td>
-                            <td class="text-center">50</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-3.jpg" title="Uploaded at 22 November 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-8.jpg" title="Uploaded at 22 November 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-14.jpg" title="Uploaded at 22 November 2022">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Samsung Galaxy S20 Ultra</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Smartphone &amp; Tablet</div>
-                            </td>
-                            <td class="text-center">71</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-3.jpg" title="Uploaded at 17 October 2021">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-3.jpg" title="Uploaded at 17 October 2021">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-1.jpg" title="Uploaded at 17 October 2021">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Sony A7 III</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Photography</div>
-                            </td>
-                            <td class="text-center">191</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-9.jpg" title="Uploaded at 9 February 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-6.jpg" title="Uploaded at 9 February 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-1.jpg" title="Uploaded at 9 February 2022">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Apple MacBook Pro 13</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">PC &amp; Laptop</div>
-                            </td>
-                            <td class="text-center">50</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-9.jpg" title="Uploaded at 12 November 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-3.jpg" title="Uploaded at 12 November 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-8.jpg" title="Uploaded at 12 November 2022">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Sony Master Series A9G</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Electronic</div>
-                            </td>
-                            <td class="text-center">50</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 9 December 2020">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-4.jpg" title="Uploaded at 9 December 2020">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-15.jpg" title="Uploaded at 9 December 2020">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Nikon Z6</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Photography</div>
-                            </td>
-                            <td class="text-center">72</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-10.jpg" title="Uploaded at 18 June 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-5.jpg" title="Uploaded at 18 June 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-6.jpg" title="Uploaded at 18 June 2022">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Sony A7 III</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Photography</div>
-                            </td>
-                            <td class="text-center">162</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-danger"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Inactive </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="intro-x">
-                            <td class="w-40">
-                                <div class="flex">
-                                    <div class="w-10 h-10 image-fit zoom-in">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-8.jpg" title="Uploaded at 29 August 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-9.jpg" title="Uploaded at 29 August 2022">
-                                    </div>
-                                    <div class="w-10 h-10 image-fit zoom-in -ml-5">
-                                        <img alt="Midone - HTML Admin Template" class="tooltip rounded-full" src="dist/images/preview-6.jpg" title="Uploaded at 29 August 2022">
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <a href="" class="font-medium whitespace-nowrap">Sony A7 III</a>
-                                <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Photography</div>
-                            </td>
-                            <td class="text-center">50</td>
-                            <td class="w-40">
-                                <div class="flex items-center justify-center text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> Active </div>
-                            </td>
-                            <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal" data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete </a>
-                                </div>
-                            </td>
-                        </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
@@ -815,6 +597,86 @@ License: You must have a valid license purchased only from themeforest(the above
         window.addEventListener('DOMContentLoaded', () => {
             lucide.set();
         });
+    </script>
+
+    <!-- BEGIN: Detail Modal -->
+    <div id="detail-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="font-medium text-base mr-auto">Detail Peminjaman</h2>
+                </div>
+                <div class="modal-body p-5" id="detail-content">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Detail Modal -->
+
+    <script>
+    function showDetailPeminjaman(id) {
+        // Fetch detail data
+        fetch(`<?= base_url('admin/dashboard/getDetail') ?>/${id}`)
+            .then(response => response.json())
+            .then(data => {
+                // Populate modal content
+                let content = `
+                    <div class="grid grid-cols-12 gap-4">
+                        <div class="col-span-12 mb-3">
+                            <div class="text-slate-500 text-xs">INFORMASI PEMINJAM</div>
+                            <div class="font-medium mt-1">${data.peminjam.NamaLengkap}</div>
+                            <div class="text-slate-500">${data.peminjam.Username}</div>
+                        </div>
+                        <div class="col-span-12">
+                            <div class="text-slate-500 text-xs mb-2">BUKU YANG DIPINJAM</div>
+                            ${data.buku.map(book => `
+                                <div class="flex items-center mt-3 border-b pb-3">
+                                    <div class="ml-3">
+                                        <div class="font-medium">${book.Judul}</div>
+                                        <div class="text-slate-500 text-xs mt-0.5">${book.Kategori}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="col-span-12 mt-3">
+                            <div class="text-slate-500 text-xs">TANGGAL PEMINJAMAN</div>
+                            <div class="font-medium mt-1">${data.peminjaman.TanggalPeminjaman}</div>
+                        </div>
+                        <div class="col-span-12 mt-3">
+                            <div class="text-slate-500 text-xs">TANGGAL PENGEMBALIAN</div>
+                            <div class="font-medium mt-1">${data.peminjaman.TanggalPengembalian}</div>
+                        </div>
+                        <div class="col-span-12 mt-3">
+                            <div class="text-slate-500 text-xs">STATUS</div>
+                            <div class="font-medium mt-1">
+                                <span class="px-2 py-1 rounded-full ${getStatusClass(data.peminjaman.StatusPeminjaman)}">
+                                    ${data.peminjaman.StatusPeminjaman}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('detail-content').innerHTML = content;
+                
+                // Show modal
+                const modal = tailwind.Modal.getInstance(document.querySelector("#detail-modal"));
+                modal.show();
+            });
+    }
+
+    function getStatusClass(status) {
+        switch(status) {
+            case 'Dipinjam':
+                return 'bg-warning/20 text-warning';
+            case 'Dikembalikan':
+                return 'bg-success/20 text-success';
+            case 'Terlambat':
+                return 'bg-danger/20 text-danger';
+            default:
+                return 'bg-slate-100 text-slate-500';
+        }
+    }
     </script>
 </body>
 

@@ -12,6 +12,7 @@ class NamaKategoriController extends BaseController
     public function __construct()
     {
         $this->kategoriModel = new NamaKategoriModels();
+
     }
 
     public function NamaKategori()

@@ -7,8 +7,12 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class LaporanController extends BaseController
 {
+
     public function Laporan()
     {
-        return view('Admin/Laporan');
+        $data = [
+            'title' => 'Laporan - Admin Dashboard'
+        ];
+        return view('Admin/Laporan', $data);
     }
 }

@@ -14,15 +14,20 @@ class LoginController extends BaseController
 
     public function authenticate()
     {
+        if (!$this->request->isAJAX()) {
+            return redirect()->back();
+        }
+
         $rules = [
             'username' => 'required',
             'password' => 'required'
         ];
 
         if (!$this->validate($rules)) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Username dan Password harus diisi');
+            return $this->response->setJSON([
+                'success' => false,
+                'error' => 'Username/Email dan Password harus diisi'
+            ]);
         }
 
         $username = $this->request->getPost('username');
@@ -31,9 +36,10 @@ class LoginController extends BaseController
         // Koneksi database
         $db = \Config\Database::connect();
         
-        // Cek user di database
-        $user = $db->table('users')
+        // Cek user berdasarkan username atau email
+        $user = $db->table('user')
             ->where('Username', $username)
+            ->orWhere('Email', $username)
             ->get()
             ->getRow();
 
@@ -46,31 +52,31 @@ class LoginController extends BaseController
                 'namaLengkap' => $user->NamaLengkap,
                 'email' => $user->Email,
                 'kelas' => $user->Kelas,
+                'role' => $user->Kelas,
                 'isLoggedIn' => true
             ];
             session()->set($sessionData);
 
-            // Redirect berdasarkan kelas/role
-            switch ($user->Kelas) {
-                case 'Admin':
-                    return redirect()->to('/Admin/Dashboard');
-                case 'Petugas':
-                    return redirect()->to('/Petugas/Dashboard');
-                case 'Peminjam':
-                    return redirect()->to('/Peminjam/Dashboard');
-                default:
-                    return redirect()->to('/');
-            }
+            // Return JSON response dengan URL redirect
+            return $this->response->setJSON([
+                'success' => true,
+                'redirect' => $user->Kelas == 'Admin' || $user->Kelas == 'Petugas' 
+                    ? base_url('/Admin/Dashboard') 
+                    : base_url('/'),
+                'message' => 'Selamat datang ' . $user->NamaLengkap
+            ]);
         }
 
-        return redirect()->back()
-            ->withInput()
-            ->with('error', 'Username atau Password salah');
+        return $this->response->setJSON([
+            'success' => false,
+            'error' => 'Username/Email atau Password salah'
+        ]);
     }
 
     public function logout()
     {
         session()->destroy();
-        return redirect()->to('/login')->with('success', 'Berhasil logout');
+        return redirect()->to('/Auth/Login')
+            ->with('success', 'Berhasil logout');
     }
 }

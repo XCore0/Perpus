@@ -19,6 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <meta name="author" content="LEFT4CODE">
         <title>LiteraSky - Register</title>
         <!-- BEGIN: CSS Assets-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
         <link rel="stylesheet" href="<?= base_url('dist/css/app.css') ?>" />
         <!-- END: CSS Assets-->
     </head>
@@ -115,7 +116,35 @@ License: You must have a valid license purchased only from themeforest(the above
             </div>
         </div>
         <!-- BEGIN: JS Assets-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
         <script src="<?= base_url('dist/js/app.js') ?>"></script>
         <!-- END: JS Assets-->
+        
+        <script>
+            // Konfigurasi Toastr
+            toastr.options = {
+                "closeButton": true,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "timeOut": "3000"
+            };
+
+            // Tampilkan pesan error jika ada
+            <?php if (session()->has('error')) : ?>
+                <?php if (is_array(session('error'))) : ?>
+                    <?php foreach (session('error') as $error) : ?>
+                        toastr.error('<?= $error ?>');
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    toastr.error('<?= session('error') ?>');
+                <?php endif; ?>
+            <?php endif; ?>
+
+            // Tampilkan pesan sukses jika ada
+            <?php if (session()->has('success')) : ?>
+                toastr.success('<?= session('success') ?>');
+            <?php endif; ?>
+        </script>
     </body>
 </html>

@@ -28,8 +28,7 @@ class RegisterController extends BaseController
             'confirm_password' => 'required|matches[password]',
             'email' => 'required|valid_email|is_unique[user.Email]',
             'nama_lengkap' => 'required',
-            'alamat' => 'required',
-            'kelas' => 'required|in_list[Admin,Petugas,Peminjam]'
+            'alamat' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -42,14 +41,14 @@ class RegisterController extends BaseController
             // Hash password
             $hashedPassword = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
 
-            // Data untuk insert
+            // Data untuk insert dengan Kelas default "Peminjam"
             $data = [
                 'Username' => $this->request->getPost('username'),
                 'Password' => $hashedPassword,
                 'Email' => $this->request->getPost('email'),
                 'NamaLengkap' => $this->request->getPost('nama_lengkap'),
                 'Alamat' => $this->request->getPost('alamat'),
-                'Kelas' => 'Peminjam' // Default sebagai Peminjam
+                'Kelas' => 'Peminjam'  // Set default Kelas sebagai "Peminjam"
             ];
 
             // Insert data
