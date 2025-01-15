@@ -12,10 +12,6 @@ class NamaKategoriModels extends Model
     protected $returnType = 'array';
     
     protected $allowedFields = [
-        'NamaKategori',
-    ];
-
-    protected $validationRules = [
-        'NamaKategori' => 'required|min_length[3]|max_length[100]'
+        'NamaKategori'
     ];
 }
