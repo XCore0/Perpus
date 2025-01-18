@@ -1,35 +1,3 @@
-<style>
-    /* Optional: To make the form appear as a modal */
-    #productForm {
-
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #productForm .modal-content {
-        background-color: white;
-        padding: 20px;
-        border-radius: 8px;
-        max-width: 500px;
-        margin: auto;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-top: 5px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-    }
-</style>
-
 <!DOCTYPE html>
 <!--
 Template Name: Midone - HTML Admin Dashboard Template
@@ -47,22 +15,24 @@ License: You must have a valid license purchased only from themeforest(the above
     <meta charset="utf-8">
     <link href="<?= base_url('dist/images/logo.svg') ?>" rel="shortcut icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-        content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-    <meta name="keywords"
-        content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="description" content="Midone admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, Midone Admin Template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="LEFT4CODE">
-    <title>Kategori Buku - Perpustakaan Digital</title>
+    <title><?= $title ?? 'Admin Dashboard' ?></title>
     <!-- BEGIN: CSS Assets-->
     <link rel="stylesheet" href="<?= base_url('dist/css/app.css') ?>" />
-    <!-- END: CSS Assets-->
-    <!-- Toastr CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <!-- jQuery (diperlukan untuk Toastr) -->
+    <!-- END: CSS Assets-->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "timeOut": "3000"
+        };
+    </script>
 </head>
 <!-- END: Head -->
 
@@ -73,18 +43,15 @@ License: You must have a valid license purchased only from themeforest(the above
             <a href="" class="flex mr-auto">
                 <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg">
             </a>
-            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2"
-                    class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="bar-chart-2" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
         </div>
         <div class="scrollable">
-            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle"
-                    class="w-8 h-8 text-white transform -rotate-90"></i> </a>
+            <a href="javascript:;" class="mobile-menu-toggler"> <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i> </a>
             <ul class="scrollable__content py-2">
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="home"></i> </div>
-                        <div class="menu__title"> Dashboard <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Dashboard <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
@@ -116,8 +83,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="box"></i> </div>
-                        <div class="menu__title"> Menu Layout <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Menu Layout <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
@@ -141,12 +107,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" class="menu">
+                    <a href="javascript:;.html" class="menu menu--active">
                         <div class="menu__icon"> <i data-lucide="shopping-bag"></i> </div>
-                        <div class="menu__title"> E-Commerce <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> E-Commerce <i data-lucide="chevron-down" class="menu__sub-icon transform rotate-180"></i> </div>
                     </a>
-                    <ul class="">
+                    <ul class="menu__sub-open">
                         <li>
                             <a href="side-menu-light-categories.html" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
@@ -160,14 +125,13 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:;" class="menu">
+                            <a href="javascript:;.html" class="menu menu--active">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Products <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Products <i data-lucide="chevron-down" class="menu__sub-icon transform rotate-180"></i> </div>
                             </a>
-                            <ul class="">
+                            <ul class="menu__sub-open">
                                 <li>
-                                    <a href="side-menu-light-product-list.html" class="menu">
+                                    <a href="side-menu-light-product-list.html" class="menu menu--active">
                                         <div class="menu__icon"> <i data-lucide="zap"></i> </div>
                                         <div class="menu__title">Product List</div>
                                     </a>
@@ -183,8 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Transactions <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Transactions <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -204,8 +167,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Sellers <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Sellers <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -268,14 +230,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
                 <li class="menu__devider my-6"></li>
                 <li>
-                    <a href="javascript:;.html" class="menu menu--active">
+                    <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="edit"></i> </div>
-                        <div class="menu__title"> Crud <i data-lucide="chevron-down"
-                                class="menu__sub-icon transform rotate-180"></i> </div>
+                        <div class="menu__title"> Crud <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
-                    <ul class="menu__sub-open">
+                    <ul class="">
                         <li>
-                            <a href="side-menu-light-crud-data-list.html" class="menu menu--active">
+                            <a href="side-menu-light-crud-data-list.html" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
                                 <div class="menu__title"> Data List </div>
                             </a>
@@ -291,8 +252,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="users"></i> </div>
-                        <div class="menu__title"> Users <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Users <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
@@ -318,8 +278,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="trello"></i> </div>
-                        <div class="menu__title"> Profile <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Profile <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
@@ -345,15 +304,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="layout"></i> </div>
-                        <div class="menu__title"> Pages <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Pages <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Wizards <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Wizards <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -379,8 +336,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Blog <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Blog <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -406,8 +362,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Pricing <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Pricing <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -427,8 +382,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Invoice <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Invoice <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -448,8 +402,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> FAQ <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                                </div>
+                                <div class="menu__title"> FAQ <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -508,15 +461,13 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="inbox"></i> </div>
-                        <div class="menu__title"> Components <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Components <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Table <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Table <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -536,8 +487,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Overlay <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Overlay <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -625,8 +575,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <li>
                     <a href="javascript:;" class="menu">
                         <div class="menu__icon"> <i data-lucide="sidebar"></i> </div>
-                        <div class="menu__title"> Forms <i data-lucide="chevron-down" class="menu__sub-icon "></i>
-                        </div>
+                        <div class="menu__title"> Forms <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                     </a>
                     <ul class="">
                         <li>
@@ -656,8 +605,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <li>
                             <a href="javascript:;" class="menu">
                                 <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Wysiwyg Editor <i data-lucide="chevron-down"
-                                        class="menu__sub-icon "></i> </div>
+                                <div class="menu__title"> Wysiwyg Editor <i data-lucide="chevron-down" class="menu__sub-icon "></i> </div>
                             </a>
                             <ul class="">
                                 <li>
@@ -701,28 +649,30 @@ License: You must have a valid license purchased only from themeforest(the above
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" class="menu">
-                        <div class="menu__icon"> <i data-lucide="hard-drive"></i> </div>
-                        <div class="menu__title"> Widgets <i data-lucide="chevron-down" class="menu__sub-icon "></i>
+                    <a href="javascript:;" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="hard-drive"></i> </div>
+                        <div class="side-menu__title">
+                            Widgets
+                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                         </div>
                     </a>
                     <ul class="">
                         <li>
-                            <a href="side-menu-light-chart.html" class="menu">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Chart </div>
+                            <a href="side-menu-light-chart.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Chart </div>
                             </a>
                         </li>
                         <li>
-                            <a href="side-menu-light-slider.html" class="menu">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Slider </div>
+                            <a href="side-menu-light-slider.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Slider </div>
                             </a>
                         </li>
                         <li>
-                            <a href="side-menu-light-image-zoom.html" class="menu">
-                                <div class="menu__icon"> <i data-lucide="activity"></i> </div>
-                                <div class="menu__title"> Image Zoom </div>
+                            <a href="side-menu-light-image-zoom.html" class="side-menu">
+                                <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                <div class="side-menu__title"> Image Zoom </div>
                             </a>
                         </li>
                     </ul>
@@ -795,48 +745,76 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END: Side Menu -->
         <!-- BEGIN: Content -->
         <div class="content">
-            <h2 class="intro-y text-lg font-medium mt-10">Data Kategori</h2>
-
+            
+            <h2 class="intro-y text-lg font-medium mt-10">Data Pengguna</h2>
             <div class="grid grid-cols-12 gap-6 mt-5">
                 <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-                    <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#add-kategori-modal">
-                        Tambah Kategori
+                    <button class="btn btn-primary shadow-md mr-2" data-tw-toggle="modal" data-tw-target="#add-modal">
+                        Tambah Pengguna
                     </button>
+                    
+                    <div class="hidden md:block mx-auto text-slate-500">
+                        Showing <?= count($users) ?> entries
+                    </div>
+                    
+                    <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
+                        <div class="w-56 relative text-slate-500">
+                            <input type="text" class="form-control w-56 box pr-10" placeholder="Search...">
+                            <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                        </div>
+                    </div>
                 </div>
-
+                
                 <!-- BEGIN: Data List -->
                 <div class="intro-y col-span-12 overflow-auto lg:overflow-visible">
                     <table class="table table-report -mt-2">
                         <thead>
                             <tr>
-                                <th class="whitespace-nowrap">NO</th>
-                                <th class="whitespace-nowrap">NAMA KATEGORI</th>
+                                <th class="whitespace-nowrap">USERNAME</th>
+                                <th class="whitespace-nowrap">NAMA LENGKAP</th>
+                                <th class="whitespace-nowrap">EMAIL</th>
+                                <th class="whitespace-nowrap">KELAS</th>
                                 <th class="text-center whitespace-nowrap">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $no = 1;
-                            foreach ($kategoris as $kategori): ?>
-                                <tr class="intro-x">
-                                    <td class="w-40"><?= $no++ ?></td>
-                                    <td><?= $kategori['NamaKategori'] ?></td>
-                                    <td class="table-report__action w-56">
-                                        <div class="flex justify-center items-center">
-                                            <button class="flex items-center mr-3 btn-edit"
-                                                data-tw-toggle="modal"
-                                                data-tw-target="#edit-kategori-modal"
-                                                data-id="<?= $kategori['KategoriID'] ?>"
-                                                data-nama="<?= $kategori['NamaKategori'] ?>">
-                                                <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
-                                            </button>
-                                            <a href="<?= route_to('Admin.Kategori.delete', $kategori['KategoriID']) ?>"
-                                                class="flex items-center text-danger"
-                                                onclick="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
-                                                <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
-                                            </a>
+                            <?php foreach ($users as $user): ?>
+                            <tr class="intro-x">
+                                <td><?= esc($user['Username']) ?></td>
+                                <td><?= esc($user['NamaLengkap']) ?></td>
+                                <td><?= esc($user['Email']) ?></td>
+                                <td>
+                                    <div class="flex items-center justify-center">
+                                        <?php
+                                        $badgeClass = match($user['Kelas']) {
+                                            'Admin' => 'bg-primary',
+                                            'Petugas' => 'bg-success',
+                                            'Peminjam' => 'bg-warning',
+                                            default => 'bg-slate-100'
+                                        };
+                                        ?>
+                                        <div class="<?= $badgeClass ?> text-white text-xs px-2 py-1 rounded-full">
+                                            <?= esc($user['Kelas']) ?>
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                                <td class="table-report__action w-56">
+                                    <div class="flex justify-center items-center">
+                                        <button class="flex items-center mr-3 text-primary edit-button" 
+                                                data-tw-toggle="modal" 
+                                                data-tw-target="#edit-modal"
+                                                data-id="<?= $user['UserID'] ?>">
+                                            <i data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit
+                                        </button>
+                                        <button class="flex items-center text-danger delete-button" 
+                                                data-tw-toggle="modal" 
+                                                data-tw-target="#delete-modal"
+                                                data-id="<?= $user['UserID'] ?>">
+                                            <i data-lucide="trash-2" class="w-4 h-4 mr-1"></i> Delete
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -846,33 +824,56 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END: Content -->
     </div>
+    <!-- BEGIN: Dark Mode Switcher-->
+    <div data-url="side-menu-dark-product-list.html" class="dark-mode-switcher cursor-pointer shadow-md fixed bottom-0 right-0 box border rounded-full w-40 h-12 flex items-center justify-center z-50 mb-10 mr-10">
+        <div class="mr-4 text-slate-600 dark:text-slate-200">Dark Mode</div>
+        <div class="dark-mode-switcher__toggle border"></div>
+    </div>
+    <!-- END: Dark Mode Switcher-->
 
     <!-- BEGIN: JS Assets-->
-    <script
-        src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     <script src="<?= base_url('dist/js/app.js') ?>"></script>
     <!-- END: JS Assets-->
-    <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest/dist/lucide.umd.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded', () => {
-            lucide.set();
-        });
-    </script>
 
     <!-- BEGIN: Add Modal -->
-    <div id="add-kategori-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div id="add-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Tambah Kategori</h2>
+                    <h2 class="font-medium text-base mr-auto">Tambah Pengguna</h2>
                 </div>
-                <form action="<?= route_to('Admin.Kategori.store') ?>" method="post">
+                <form action="<?= base_url('Admin/User/create') ?>" method="post">
                     <?= csrf_field() ?>
                     <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                         <div class="col-span-12">
-                            <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                            <input id="nama_kategori" name="nama_kategori" type="text" class="form-control" placeholder="Masukkan nama kategori" required>
+                            <label for="Username" class="form-label">Username</label>
+                            <input type="text" id="Username" name="Username" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="Password" class="form-label">Password</label>
+                            <input type="password" id="Password" name="Password" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="Email" class="form-label">Email</label>
+                            <input type="email" id="Email" name="Email" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="NamaLengkap" class="form-label">Nama Lengkap</label>
+                            <input type="text" id="NamaLengkap" name="NamaLengkap" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="Alamat" class="form-label">Alamat</label>
+                            <textarea id="Alamat" name="Alamat" class="form-control w-full" required></textarea>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="Kelas" class="form-label">Kelas</label>
+                            <select id="Kelas" name="Kelas" class="form-select w-full" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Petugas">Petugas</option>
+                                <option value="Peminjam">Peminjam</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -886,23 +887,47 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- END: Add Modal -->
 
     <!-- BEGIN: Edit Modal -->
-    <div id="edit-kategori-modal" class="modal" tabindex="-1" aria-hidden="true">
+    <div id="edit-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="font-medium text-base mr-auto">Edit Kategori</h2>
+                    <h2 class="font-medium text-base mr-auto">Edit Pengguna</h2>
                 </div>
-                <form id="form-edit" method="post">
+                <form action="" method="post" id="edit-form">
                     <?= csrf_field() ?>
                     <div class="modal-body grid grid-cols-12 gap-4 gap-y-3">
                         <div class="col-span-12">
-                            <label for="edit_nama_kategori" class="form-label">Nama Kategori</label>
-                            <input id="edit_nama_kategori" name="nama_kategori" type="text" class="form-control" required>
+                            <label for="edit-Username" class="form-label">Username</label>
+                            <input type="text" id="edit-Username" name="Username" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="edit-Password" class="form-label">Password (Kosongkan jika tidak diubah)</label>
+                            <input type="password" id="edit-Password" name="Password" class="form-control w-full">
+                        </div>
+                        <div class="col-span-12">
+                            <label for="edit-Email" class="form-label">Email</label>
+                            <input type="email" id="edit-Email" name="Email" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="edit-NamaLengkap" class="form-label">Nama Lengkap</label>
+                            <input type="text" id="edit-NamaLengkap" name="NamaLengkap" class="form-control w-full" required>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="edit-Alamat" class="form-label">Alamat</label>
+                            <textarea id="edit-Alamat" name="Alamat" class="form-control w-full" required></textarea>
+                        </div>
+                        <div class="col-span-12">
+                            <label for="edit-Kelas" class="form-label">Kelas</label>
+                            <select id="edit-Kelas" name="Kelas" class="form-select w-full" required>
+                                <option value="Admin">Admin</option>
+                                <option value="Petugas">Petugas</option>
+                                <option value="Peminjam">Peminjam</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-20 mr-1">Batal</button>
-                        <button type="submit" class="btn btn-primary w-20">Update</button>
+                        <button type="submit" class="btn btn-primary w-20">Simpan</button>
                     </div>
                 </form>
             </div>
@@ -910,89 +935,141 @@ License: You must have a valid license purchased only from themeforest(the above
     </div>
     <!-- END: Edit Modal -->
 
-    <!-- Script untuk Edit -->
+    <!-- BEGIN: Delete Modal -->
+    <div id="delete-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <div class="p-5 text-center">
+                        <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
+                        <div class="text-3xl mt-5">Apakah anda yakin?</div>
+                        <div class="text-slate-500 mt-2">Data pengguna ini akan dihapus secara permanen.</div>
+                    </div>
+                    <div class="px-5 pb-8 text-center">
+                        <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Batal</button>
+                        <a href="" class="btn btn-danger w-24" id="confirm-delete">Hapus</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Delete Modal -->
+
+    <!-- BEGIN: Javascript -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Menghandle klik tombol edit
-            const btnEdits = document.querySelectorAll('.btn-edit');
-            btnEdits.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const id = this.dataset.id;
-                    const nama = this.dataset.nama;
+    document.addEventListener('DOMContentLoaded', function() {
+        // Edit button handler
+        const editButtons = document.querySelectorAll('.edit-button');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.dataset.id;
+                
+                fetch(`<?= base_url('Admin/User/getUser') ?>/${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            toastr.error(data.error);
+                            return;
+                        }
 
-                    // Set nilai form
-                    document.getElementById('edit_nama_kategori').value = nama;
+                        // Isi form dengan data
+                        document.getElementById('edit-Username').value = data.Username;
+                        document.getElementById('edit-Email').value = data.Email;
+                        document.getElementById('edit-NamaLengkap').value = data.NamaLengkap;
+                        document.getElementById('edit-Alamat').value = data.Alamat;
+                        document.getElementById('edit-Kelas').value = data.Kelas;
 
-                    // Set action URL form
-                    const form = document.getElementById('form-edit');
-                    form.action = `<?= base_url('Admin/Kategori/update') ?>/${id}`;
-                });
+                        // Update form action
+                        const form = document.getElementById('edit-form');
+                        form.action = `<?= base_url('Admin/User/update') ?>/${userId}`;
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                        toastr.error('Terjadi kesalahan saat mengambil data user');
+                    });
             });
         });
-    </script>
 
-    <!-- Tambahkan di bagian bawah sebelum closing body -->
-    <script>
-        // Konfigurasi default Toastr
-        toastr.options = {
-            "closeButton": true,
-            "debug": false,
-            "newestOnTop": true,
-            "progressBar": true,
-            "positionClass": "toast-top-right",
-            "preventDuplicates": false,
-            "onclick": null,
-            "showDuration": "300",
-            "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
-            "showEasing": "swing",
-            "hideEasing": "linear",
-            "showMethod": "fadeIn",
-            "hideMethod": "fadeOut"
-        };
-
-        // Notifikasi Success
-        <?php if (session()->getFlashdata('success')) : ?>
-            toastr.success('<?= session()->getFlashdata('success') ?>', 'Berhasil!');
-        <?php endif; ?>
-
-        // Notifikasi Error
-        <?php if (session()->getFlashdata('error')) : ?>
-            toastr.error('<?= session()->getFlashdata('error') ?>', 'Error!');
-        <?php endif; ?>
-
-        // Notifikasi Warning
-        <?php if (session()->getFlashdata('warning')) : ?>
-            toastr.warning('<?= session()->getFlashdata('warning') ?>', 'Peringatan!');
-        <?php endif; ?>
-
-        // Notifikasi Info
-        <?php if (session()->getFlashdata('info')) : ?>
-            toastr.info('<?= session()->getFlashdata('info') ?>', 'Informasi');
-        <?php endif; ?>
-
-        // Konfirmasi Delete
-        function confirmDelete(url) {
-            if (confirm('Apakah Anda yakin ingin menghapus data ini?')) {
-                $.get(url, function(result) {
-                    toastr.success('Data berhasil dihapus!', 'Berhasil!');
-                    // Reload halaman setelah 1 detik
-                    setTimeout(function() {
-                        location.reload();
-                    }, 1000);
-                }).fail(function() {
-                    toastr.error('Gagal menghapus data!', 'Error!');
-                });
-            }
-            return false;
-        }
-
-        // Handle form submission
-        $('form').on('submit', function() {
-            toastr.info('Memproses...', 'Mohon tunggu');
+        // Delete button handler
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.dataset.id;
+                if(confirm('Apakah Anda yakin ingin menghapus pengguna ini?')) {
+                    window.location.href = `<?= base_url('Admin/User/delete') ?>/${userId}`;
+                }
+            });
         });
+    });
     </script>
+    <!-- END: Javascript -->
+
+    <!-- BEGIN: Javascript -->
+    <script>
+    // Notifikasi dengan Toastr
+    <?php if(session()->getFlashdata('success')): ?>
+        toastr.success('<?= session()->getFlashdata('success') ?>');
+    <?php endif; ?>
+
+    <?php if(session()->getFlashdata('error')): ?>
+        <?php 
+        $error = session()->getFlashdata('error');
+        if(is_array($error)): 
+            foreach($error as $err): ?>
+                toastr.error('<?= esc($err) ?>');
+            <?php endforeach; 
+        else: ?>
+            toastr.error('<?= esc($error) ?>');
+        <?php endif; ?>
+    <?php endif; ?>
+
+    // Script edit yang sudah ada
+    document.addEventListener('DOMContentLoaded', function() {
+        // Edit button handler
+        const editButtons = document.querySelectorAll('.edit-button');
+        editButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.dataset.id;
+                
+                fetch(`<?= base_url('Admin/User/getUser') ?>/${userId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            toastr.error(data.error);
+                            return;
+                        }
+
+                        // Isi form dengan data
+                        document.getElementById('edit-Username').value = data.Username;
+                        document.getElementById('edit-Email').value = data.Email;
+                        document.getElementById('edit-NamaLengkap').value = data.NamaLengkap;
+                        document.getElementById('edit-Alamat').value = data.Alamat;
+                        document.getElementById('edit-Kelas').value = data.Kelas;
+
+                        // Update form action
+                        const form = document.getElementById('edit-form');
+                        form.action = `<?= base_url('Admin/User/update') ?>/${userId}`;
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                        toastr.error('Terjadi kesalahan saat mengambil data user');
+                    });
+            });
+        });
+
+        // Delete confirmation
+        const deleteButtons = document.querySelectorAll('.delete-button');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.dataset.id;
+                if(confirm('Apakah Anda yakin ingin menghapus pengguna ini?')) {
+                    window.location.href = `<?= base_url('Admin/User/delete') ?>/${userId}`;
+                }
+            });
+        });
+    });
+    </script>
+    <!-- END: Javascript -->
 </body>
 
 </html>

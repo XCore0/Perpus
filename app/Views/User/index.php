@@ -113,24 +113,25 @@
         </div>
     </section>
 
-    <section class="relative mt-8 mb-12uto px-6">
+    <!-- Update bagian search input -->
+    <section class="relative mt-8 mb-12 container mx-auto px-6">
         <div class="bg-white rounded-xl shadow-lg p-6">
             <div class="flex flex-col md:flex-row gap-4">
                 <div class="flex-1">
                     <div class="relative">
-                        <input type="text" placeholder="Cari judul buku, penulis, atau kategori..."
-                            class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <input type="text" 
+                               id="searchInput" 
+                               placeholder="Cari judul buku, penulis, atau kategori..." 
+                               class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                         <i class="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                     </div>
                 </div>
                 <div class="flex gap-4">
-
-                    <button class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                    <button onclick="searchBooks()" class="bg-blue-500 text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition-colors">
                         Cari
                     </button>
                 </div>
             </div>
-        </div>
         </div>
     </section>
 
@@ -1946,6 +1947,146 @@
                 }
             </style>
         `);
+    </script>
+
+    <!-- Tambahkan script untuk pencarian -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Event listener untuk input pencarian
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('keyup', function(e) {
+            if (e.key === 'Enter') {
+                searchBooks();
+            }
+        });
+    });
+
+    function searchBooks() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const bookCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+        let found = false;
+
+        bookCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const category = card.querySelector('p').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || category.includes(searchTerm)) {
+                card.style.display = '';
+                found = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Tampilkan pesan jika tidak ada hasil
+        const noResultsDiv = document.getElementById('noResults');
+        if (!noResultsDiv) {
+            const gridContainer = document.querySelector('.grid.grid-cols-1.md\\:grid-cols-3');
+            const noResults = document.createElement('div');
+            noResults.id = 'noResults';
+            noResults.className = 'col-span-full text-center py-8 text-gray-500';
+            gridContainer.appendChild(noResults);
+        }
+
+        document.getElementById('noResults').innerHTML = !found ? 
+            `<p>Tidak ditemukan buku dengan kata kunci "${searchTerm}"</p>` : '';
+
+        // Update judul section sesuai pencarian
+        const sectionTitle = document.querySelector('.md\\:w-3\\/4 h2');
+        sectionTitle.textContent = searchTerm ? 
+            `Hasil Pencarian: "${searchTerm}"` : 
+            'Semua Kategori';
+    }
+
+    // Tambahkan filter berdasarkan kategori
+    function filterByCategory(categoryName, element) {
+        // Reset semua tombol kategori
+        document.querySelectorAll('.category-button').forEach(btn => {
+            btn.classList.remove('border-blue-500', 'bg-blue-50', 'text-blue-600');
+            btn.classList.add('border-gray-200');
+        });
+
+        // Aktifkan tombol yang diklik
+        element.classList.remove('border-gray-200');
+        element.classList.add('border-blue-500', 'bg-blue-50', 'text-blue-600');
+
+        const bookCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+        let found = false;
+
+        bookCards.forEach(card => {
+            const category = card.querySelector('p').textContent.trim();
+            
+            if (categoryName === 'Semua Kategori' || category === categoryName) {
+                card.style.display = '';
+                found = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Update judul section
+        const sectionTitle = document.querySelector('.md\\:w-3\\/4 h2');
+        sectionTitle.textContent = categoryName;
+
+        // Tampilkan/sembunyikan pesan tidak ada hasil
+        const noResultsDiv = document.getElementById('noResults');
+        if (noResultsDiv) {
+            noResultsDiv.innerHTML = !found ? 
+                `<p>Tidak ditemukan buku dalam kategori "${categoryName}"</p>` : '';
+        }
+
+        // Reset search input
+        document.getElementById('searchInput').value = '';
+    }
+
+    // Tambahkan fungsi untuk kombinasi pencarian dan filter
+    function searchAndFilter() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+        const activeCategory = document.querySelector('.category-button.border-blue-500')?.textContent.trim();
+        const bookCards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+        let found = false;
+
+        bookCards.forEach(card => {
+            const title = card.querySelector('h3').textContent.toLowerCase();
+            const category = card.querySelector('p').textContent.trim();
+            const matchesSearch = !searchTerm || title.includes(searchTerm);
+            const matchesCategory = activeCategory === 'Semua Kategori' || category === activeCategory;
+
+            if (matchesSearch && matchesCategory) {
+                card.style.display = '';
+                found = true;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Update pesan tidak ada hasil
+        const noResultsDiv = document.getElementById('noResults');
+        if (noResultsDiv) {
+            if (!found) {
+                let message = `Tidak ditemukan buku`;
+                if (searchTerm) message += ` dengan kata kunci "${searchTerm}"`;
+                if (activeCategory !== 'Semua Kategori') message += ` dalam kategori "${activeCategory}"`;
+                noResultsDiv.innerHTML = `<p>${message}</p>`;
+            } else {
+                noResultsDiv.innerHTML = '';
+            }
+        }
+
+        // Update judul section
+        const sectionTitle = document.querySelector('.md\\:w-3\\/4 h2');
+        let title = '';
+        if (searchTerm && activeCategory !== 'Semua Kategori') {
+            title = `Hasil Pencarian: "${searchTerm}" dalam ${activeCategory}`;
+        } else if (searchTerm) {
+            title = `Hasil Pencarian: "${searchTerm}"`;
+        } else if (activeCategory !== 'Semua Kategori') {
+            title = activeCategory;
+        } else {
+            title = 'Semua Kategori';
+        }
+        sectionTitle.textContent = title;
+    }
     </script>
 </body>
 

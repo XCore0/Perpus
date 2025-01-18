@@ -77,58 +77,16 @@ License: You must have a valid license purchased only from themeforest(the above
                 </li>
 
                 <li>
-                    <a href="<?= route_to('Admin.Laporan') ?>" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="file-text"></i> </div>
-                        <div class="side-menu__title"> Laporan </div>
+                    <a href="<?= route_to('Admin.User') ?>" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                        <div class="side-menu__title"> Pengguna </div>
                     </a>
                 </li>
-
                 <li>
-                    <a href="javascript:;" class="side-menu">
+                    <a href="<?= route_to('Admin.PeminjamanPengembalian') ?>" class="side-menu">
                         <div class="side-menu__icon"> <i data-lucide="layers"></i> </div>
-                        <div class="side-menu__title">
-                            Layanan
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
+                        <div class="side-menu__title"> Peminjaman dan Pengembalian </div>
                     </a>
-                    <ul class="">
-                        <li>
-                            <a href="<?= base_url('peminjaman') ?>" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="shopping-cart"></i> </div>
-                                <div class="side-menu__title"> Peminjaman </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('pengembalian') ?>" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="corner-up-left"></i> </div>
-                                <div class="side-menu__title"> Pengembalian </div>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a href="javascript:;" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="settings"></i> </div>
-                        <div class="side-menu__title">
-                            Pengaturan
-                            <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
-                        </div>
-                    </a>
-                    <ul class="">
-                        <li>
-                            <a href="<?= base_url('pengaturan/profil') ?>" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="user"></i> </div>
-                                <div class="side-menu__title"> Profil </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="<?= base_url('pengaturan/pengguna') ?>" class="side-menu">
-                                <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
-                                <div class="side-menu__title"> Pengguna </div>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li>
